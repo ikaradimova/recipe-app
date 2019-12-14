@@ -1,0 +1,178 @@
+<!doctype html>
+<html   lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Recipe App</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic"
+            rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+
+<!--<div class="custom-navbar"></div>-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="#">Recipe App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <!-- Logged | Admin -->
+                <li class="nav-item add-recipe-link">
+                    <a class="nav-link" href="/recipe/add">Add recipe</a>
+                </li>
+                <!-- Logged -->
+                <li class="nav-item profile-link">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <!-- No Logged -->
+                <li class="nav-item login-link">
+                    <a class="nav-link"
+                       href="#"
+                       data-toggle="modal"
+                       data-target="#loginModal"
+                    >Login</a>
+                </li>
+                <!-- Register -->
+                <li class="nav-item register-link">
+                    <a class="nav-link"
+                       href="#"
+                       data-toggle="modal"
+                       data-target="#registerModal"
+                    >Register</a>
+                </li>
+                <!-- Logged -->
+                <li class="nav-item logout-link">
+                    <a class="nav-link logout" href="/profile/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 recipe-add-form">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">Add Recipe</div>
+                <div class="card-body">
+                    <div class="row">
+                        <form class="col-md-12" id="recipe-add-form" action="/recipe/add" method="POST">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="recipe-title-add">Title</label>
+                                    <input type="text"
+                                           class="form-control" id="recipe-title-add"
+                                           placeholder="Insert title">
+                                    <small></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe-preptime-add">Preparation time (in minutes)</label>
+                                    <input type="text"
+                                           class="form-control" id="recipe-preptime-add"
+                                           placeholder="Insert preparation time">
+                                    <small></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe-description-add">Description</label>
+                                    <textarea
+                                            rows="4" cols="40"
+                                            class="form-control" id="recipe-description-add"
+                                            placeholder="Insert description"></textarea>
+                                    <small></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe-ingredients-add">Ingredients</label>
+                                    <textarea
+                                            rows="4" cols="40"
+                                            class="form-control" id="recipe-ingredients-add"
+                                            placeholder="Insert ingredients"></textarea>
+                                    <small></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe-preparation-add">Preparation</label>
+                                    <textarea
+                                            rows="4" cols="40"
+                                            class="form-control" id="recipe-preparation-add"
+                                            placeholder="Insert preparation"></textarea>
+                                    <small></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe-cover-add">Cover photo</label>
+                                    <input type='file' id='recipe-cover-add'>
+                                    <small></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe-diet-add">Diet</label>
+                                    <select id="recipe-diet-add">
+
+                                    </select>
+                                    <small></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe-cuisine-add">Cuisine</label>
+                                    <select id="recipe-cuisine-add">
+
+                                    </select>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-end">
+                                <button id="recipe-add-button" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/recipe-add.js"></script>
+<script src="../js/login.js"></script>
+<script src="../js/register.js"></script>
+<script src="../js/logout.js"></script>
+</body>
+
+
+</html>

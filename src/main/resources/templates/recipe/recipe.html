@@ -1,0 +1,147 @@
+<!doctype html>
+<html   lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Recipe App</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic"
+            rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+
+<!--<div class="custom-navbar"></div>-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="#">Recipe App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <!-- Logged | Admin -->
+                <li class="nav-item add-recipe-link">
+                    <a class="nav-link" href="/recipe/add">Add recipe</a>
+                </li>
+                <!-- Logged -->
+                <li class="nav-item profile-link">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <!-- No Logged -->
+                <li class="nav-item login-link">
+                    <a class="nav-link"
+                       href="#"
+                       data-toggle="modal"
+                       data-target="#loginModal"
+                    >Login</a>
+                </li>
+                <!-- Register -->
+                <li class="nav-item register-link">
+                    <a class="nav-link"
+                       href="#"
+                       data-toggle="modal"
+                       data-target="#registerModal"
+                    >Register</a>
+                </li>
+                <!-- Logged -->
+                <li class="nav-item logout-link">
+                    <a class="nav-link logout" href="/profile/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 recipe-add-form">
+    <main role="main">
+        <section>
+            <h2><span class="recipe-title"></span> <span>ready for </span><span id="recipe-preptime"> </span></h2>
+            <div class="recipeContainer">
+                <div>
+                    <img class="cover recipe-cover">
+                </div>
+                <div>
+                    <p>Published by: <span class="recipe-author"></span></p>
+                    <p class="recipe-publish-date"></p>
+                </div>
+
+                <div>
+                    <p>Cuisine: <span class="recipe-cuisine"></span></p>
+                </div>
+                <div>
+                    <p>Diet: <span class="recipe-diet"></span></p>
+                </div>
+
+                <div>
+                    <p class="title">Ingredients</p>
+                    <ul class="recipe-ingredients">
+
+                    </ul>
+                </div>
+                <div>
+                    <p class="title">Description</p>
+                    <p class="recipe-description">Description</p>
+                </div>
+                <div>
+                    <p class="title">Preparation</p>
+                    <p class="recipe-preparation">Preparation</p>
+                </div>
+<!--                <div style="margin-top: 10px">-->
+<!--                    <button type="submit" class="btn btn-secondary modal-button float-left"-->
+<!--                            style="margin-left: 100px;">-->
+<!--                        Edit-->
+<!--                    </button>-->
+<!--                    <button type="submit"><a class="editPost" href="">Редактиране на рецепта</a></button>-->
+<!--                    <button type="submit"-->
+<!--                            class="btn btn-secondary red-modal-button float-right"-->
+<!--                            style="margin-right: 100px;">-->
+<!--                        Delete-->
+<!--                    </button>-->
+<!--                </div>-->
+            </div>
+        </section>
+    </main>
+</div>
+
+
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/recipe.js"></script>
+<script src="../js/login.js"></script>
+<script src="../js/register.js"></script>
+<script src="../js/logout.js"></script>
+</body>
+
+
+</html>
