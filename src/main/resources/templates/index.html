@@ -269,11 +269,68 @@
     </div>
 </div>
 
+<div class="container filter-container">
+    <div class="row filter-row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">Filters</div>
+                <div class="card-body">
+                    <div class="row">
+<!--                        <div class="col-md-4">-->
+<!--                            <div class="filter filter-diet col-4 form-group">-->
+<!--                                <div class="radio radio-diet">-->
+<!--                                    <label><input type="radio" name="all" checked>All</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="filter filter-cuisine col-4 form-group">-->
+<!--                                <div class="radio">-->
+<!--                                    <label><input type="radio" name="all" checked>All</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="filter filter-view col-4 form-group">-->
+<!--                                <div class="radio">-->
+<!--                                    <label><input type="radio" name="grid" checked>Grid</label>-->
+<!--                                </div>-->
+<!--                                <div class="radio">-->
+<!--                                    <label><input type="radio" name="list">List</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        <div class="form-group col-4">
+                            <label>Diets</label>
+                            <select class="form-control filter-diet">
+                                <option>All</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label>Cuisines</label>
+                            <select class="form-control filter-cuisine">
+                                <option>All</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label>Views</label>
+                            <select class="form-control filter-view">
+                                <option>Grid</option>
+                                <option>List</option>
+                            </select>
+                        </div>
+<!--                        </div>-->
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button id="filter-add-button" type="button" class="btn btn-primary">Apply</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div class="container recipe-container">
     <div class="row recipe-row" style="margin-top:30px;">
-        <div class="card recipe-card" style="width: 16rem; display: none;">
+        <div class="card recipe-card col-3" style="display: none;">
             <img class="card-img-top" src="\image-upload\prosveta.jpg"
-                 style="max-width: 16rem; max-height: 12rem;"
+                 style="max-height: 12rem;"
                  alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Title</h5>

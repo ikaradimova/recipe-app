@@ -83,21 +83,21 @@
                         <form class="col-md-12" id="recipe-add-form" action="/recipe/add" method="POST">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="recipe-title-add">Title</label>
+<!--                                    <label for="recipe-title-add">Title</label>-->
                                     <input type="text"
                                            class="form-control" id="recipe-title-add"
                                            placeholder="Insert title">
                                     <small></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipe-preptime-add">Preparation time (in minutes)</label>
+<!--                                    <label for="recipe-preptime-add">Preparation time (in minutes)</label>-->
                                     <input type="text"
                                            class="form-control" id="recipe-preptime-add"
-                                           placeholder="Insert preparation time">
+                                           placeholder="Insert preparation time (in minutes)">
                                     <small></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipe-description-add">Description</label>
+<!--                                    <label for="recipe-description-add">Description</label>-->
                                     <textarea
                                             rows="4" cols="40"
                                             class="form-control" id="recipe-description-add"
@@ -105,15 +105,15 @@
                                     <small></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipe-ingredients-add">Ingredients</label>
+<!--                                    <label for="recipe-ingredients-add">Ingredients</label>-->
                                     <textarea
                                             rows="4" cols="40"
                                             class="form-control" id="recipe-ingredients-add"
-                                            placeholder="Insert ingredients"></textarea>
+                                            placeholder="Insert ingredients (separated by comma)"></textarea>
                                     <small></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipe-preparation-add">Preparation</label>
+<!--                                    <label for="recipe-preparation-add">Preparation</label>-->
                                     <textarea
                                             rows="4" cols="40"
                                             class="form-control" id="recipe-preparation-add"
@@ -121,23 +121,31 @@
                                     <small></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipe-cover-add">Cover photo</label>
+<!--                                    <label for="recipe-cover-add">Cover photo</label>-->
                                     <input type='file' id='recipe-cover-add'>
                                     <small></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipe-diet-add">Diet</label>
-                                    <select id="recipe-diet-add">
+<!--                                    <label for="recipe-diet-add">Diet</label>-->
+                                    <select id="recipe-diet-add" class="form-control">
 
                                     </select>
+                                    <a class="add-diet-link" href="/diet">Add diet</a>
                                     <small></small>
+<!--                                    <li class="nav-item add-diet-link">-->
+
+<!--                                    </li>-->
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipe-cuisine-add">Cuisine</label>
-                                    <select id="recipe-cuisine-add">
+<!--                                    <label for="recipe-cuisine-add">Cuisine</label>-->
+                                    <select id="recipe-cuisine-add" class="form-control">
 
                                     </select>
+                                    <a class="add-cuisine-link" href="/cuisine">Add cuisine</a>
                                     <small></small>
+<!--                                    <li class="nav-item add-cuisine-link">-->
+
+<!--                                    </li>-->
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">

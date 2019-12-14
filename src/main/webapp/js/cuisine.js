@@ -37,11 +37,12 @@ $(document).ready(function () {
                     },
                     success: function (data) {
                         console.log(data);
-                        if(data === 'success'){
-                            console.log('cuisine successfully added');
-                            // window.location.href = "profile.html";
+                        if(data.id){
+                            alert('Cuisine successfully added!');
+                            location.reload();
                         } else {
-                            console.log('error while adding cuisine')
+                            alert('Something went wrong, please try again!');
+                            location.reload();
                         }
                         // window.location.replace(data);
                     },

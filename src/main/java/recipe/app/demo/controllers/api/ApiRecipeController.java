@@ -232,4 +232,30 @@ public class ApiRecipeController {
 
 //        }
     }
+
+    @GetMapping("/filter")
+    public List<Recipe> filter(
+//            @RequestParam(value = "dietId") int dietId,
+            @RequestParam(value = "cuisineId") int cuisineId
+    ){
+//        if(dietId == 0){
+//            if(cuisineId == 0){
+//                return recipeRepository.findAll();
+//            } else {
+//                return recipeRepository.findByCuisineId(cuisineId);
+//            }
+//        } else {
+//            if(cuisineId == 0){
+//                return recipeRepository.findByDietId(dietId);
+//            } else {
+//                return recipeRepository.findByDietIdAndCuisineId(dietId, cuisineId);
+//            }
+//        }
+
+        if(cuisineId != 0){
+                return recipeRepository.findByCuisineId(cuisineId);
+            } else {
+                return recipeRepository.findAll();
+            }
+    }
 }

@@ -37,16 +37,24 @@ $(document).ready(function () {
                     },
                     success: function (data) {
                         console.log(data);
-                        if(data === 'success'){
-                            console.log('Diet successfully added');
-                            // window.location.href = "profile.html";
+                        if(data.id){
+                            alert('Diet successfully added!');
+                            location.reload();
                         } else {
-                            console.log('error while adding diet')
+                            alert('Something went wrong, please try again!');
+                            location.reload();
                         }
+                        // if(data === 'success'){
+                        //     console.log('Diet successfully added');
+                        //     // window.location.href = "profile.html";
+                        // } else {
+                        //     console.log('error while adding diet')
+                        // }
                         // window.location.replace(data);
                     },
                     fail: function () {
-                        console.log('error')
+                        alert('Something went wrong, please try again!');
+                        location.reload();
                         // window.location.href = "error.html";
                     }
                 });

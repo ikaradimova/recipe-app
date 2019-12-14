@@ -27,6 +27,11 @@ $(document).ready(function () {
                 if(!response){
                     window.location = "/";
                     // return;
+                } else {
+                    if(response.role.name === 'user'){
+                        $('.add-cuisine-link').hide();
+                        $('.add-diet-link').hide();
+                    }
                 }
             });
 
@@ -178,17 +183,19 @@ $(document).ready(function () {
                     //     // window.location.replace(data);
                     // },
                     complete: function(data){
+                        console.log(data);
                         if(!data){
                             window.location = "/";
                             return;
                         }
                         switch(data.status){
                             case 200:
-
-
+                                alert('Recipe successfully added!');
+                                location.reload();
                                 break;
                             case 401:
-                                window.location.href = "/";
+                                alert('Something went wrong, please try again!');
+                                location.reload();
                                 break;
 
                         }
