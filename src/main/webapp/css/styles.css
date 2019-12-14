@@ -1,22 +1,22 @@
-/* Selector за всички елементи */
+/* Selector пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 * {
     box-sizing: border-box;
 }
 
-/* Selector по таг */
+/* Selector пїЅпїЅ пїЅпїЅпїЅ */
 body {
     background-color: #f1f1f1;
     font-family: 'Roboto', sans-serif;
 }
 
-/* Selector по id */
+/* Selector пїЅпїЅ id */
 #main-container {
     background-color: #ffffff;
     padding: 100px;
     display: flex;
 }
 
-/* Selector по class */
+/* Selector пїЅпїЅ class */
 .main-item {
     background-color: rgb(61, 155, 61);
     padding: 5px;
@@ -27,17 +27,17 @@ body {
     cursor: pointer;
     box-shadow: 10px 10px 5px -9px rgba(0,0,0,0.75);
 }
-/* Selector за минаване с мишката върху елемент */
+/* Selector пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 .main-item:hover {
     background-color: rgb(74, 190, 74);
 }
 
-/* Selector за елемент следван от друг елемент */
+/* Selector пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 .main-item + .main-item {
     margin-left: 45px;
 }
 
-/* Selector, който е специфичен само за контейнер с клас .main-item */
+/* Selector, пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ .main-item */
 .main-item .main-img {
     width: 100%;
 }
@@ -48,4 +48,38 @@ body {
 }
 .main-item .main-description {
     font-size: 18px;
+}
+
+.recipe-add-form > .row > .recipe-whole-title{
+    text-align: center;
+}
+
+.recipe-cover{
+    max-width:100%;
+    max-height:100%;
+}
+
+.title:not(span) {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.title > span{
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+.recipe-ingredients {
+    list-style: none;
+    padding: 0;
+}
+.recipe-ingredients >li {
+    padding-left: 1.3em;
+}
+.recipe-ingredients > li:before {
+    content: "\f00c"; /* FontAwesome Unicode */
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-left: -1.3em; /* same as padding-left set on li */
+    width: 1.3em; /* same as padding-left set on li */
 }

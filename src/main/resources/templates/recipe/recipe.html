@@ -1,7 +1,7 @@
 <!doctype html>
-<html   lang="en"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
 >
 
 <head>
@@ -19,7 +19,7 @@
     <link
             href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic"
             rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
 </head>
 
@@ -90,7 +90,7 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="fa fa-user"></i>
                                 </span>
                             </div>
                             <input
@@ -127,7 +127,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>-->
                 <button id="confirm-login" type="button" class="btn btn-success">Login</button>
             </div>
         </div>
@@ -182,7 +182,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>-->
                 <button id="confirm-register" type="button" class="btn btn-success">Register</button>
             </div>
         </div>
@@ -191,24 +191,19 @@
 
 
 <div class="container mt-5 recipe-add-form">
-    <main role="main">
-        <section>
-            <h2><span class="recipe-title"></span> <span>ready for </span><span class="recipe-preptime"> </span> minutes</h2>
-            <div class="recipeContainer">
-                <div>
-                    <img class="cover recipe-cover">
-                </div>
-                <div>
-                    <p>Published by: <span class="recipe-author"></span></p>
-                    <p class="recipe-publish-date"></p>
-                </div>
-
-                <div>
-                    <p>Cuisine: <span class="recipe-cuisine"></span></p>
-                </div>
-                <div>
-                    <p>Diet: <span class="recipe-diet"></span></p>
-                </div>
+    <div class="row">
+        <!--        <section>-->
+        <h2 class="recipe-whole-title">
+            <span class="recipe-title"></span>
+            <span> ready for </span>
+            <span class="recipe-preptime"> </span> minutes</h2>
+    </div>
+    <div class="recipeContainer">
+        <div class="row">
+            <div class="col-8">
+                <img class="cover recipe-cover">
+            </div>
+            <div class="col-4">
 
                 <div>
                     <p class="title">Ingredients</p>
@@ -216,21 +211,51 @@
 
                     </ul>
                 </div>
-                <div>
-                    <p class="title">Description</p>
-                    <p class="recipe-description">Description</p>
-                </div>
-                <div>
-                    <p class="title">Preparation</p>
-                    <p class="recipe-preparation">Preparation</p>
-                </div>
-                <div>
-                    <a class="edit-recipe-link" href="">Edit recipe</a>
-                    <a class="delete-recipe-link" href="">Delete recipe</a>
-                </div>
             </div>
-        </section>
-    </main>
+
+        </div>
+        <div class="row">
+            <div>
+                <p class="title">Published by: <span class="recipe-author"></span></p>
+            </div>
+        </div>
+        <div class="row">
+
+            <div>
+                <p class="title">Published at: <span class="recipe-publish-date"></span></p>
+            </div>
+        </div>
+        <div class="row">
+
+            <div>
+                <p class="title">Cuisine: <span class="recipe-cuisine"></span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <p class="title">Diet: <span class="recipe-diet"></span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <p class="title">Description</p>
+                <p class="recipe-description">Description</p>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <p class="title">Preparation</p>
+                <p class="recipe-preparation">Preparation</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <a class="edit-recipe-link" href="">Edit recipe</a>
+            <a class="delete-recipe-link" href="">Delete recipe</a>
+        </div>
+    </div>
+    <!--        </section>-->
+</div>
 </div>
 
 
