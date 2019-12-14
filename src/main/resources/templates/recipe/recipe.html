@@ -31,7 +31,7 @@
 
     <div class="container">
 
-        <a class="navbar-brand" href="#">Recipe App</a>
+        <a class="navbar-brand" href="/">Recipe App</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -73,10 +73,127 @@
     </div>
 </nav>
 
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form" action="login" method="POST">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                            <input
+                                    type="text" class="form-control"
+                                    id="login-username"
+                                    placeholder="Enter username"
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                            </div>
+                            <input
+                                    type="password" class="form-control"
+                                    id="login-password"
+                                    placeholder="Enter password"
+                            >
+                        </div>
+                    </div>
+                    <!--
+                    <div class="d-flex justify-content-between">
+                        <button id="login-button" type="button" class="btn btn-success">Влез</button>
+                        <button type="button" class="btn btn-outline-success"
+                                data-toggle="modal"
+                                data-target="#registerModal">Регистрация
+                        </button>
+                    </div> -->
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button id="confirm-login" type="button" class="btn btn-success">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="register-form" action="register" method="POST">
+                    <div class="form-group">
+                        <!--<label for="register-email">Email</label>-->
+                        <input
+                                name="email"
+                                type="email"
+                                class="form-control"
+                                id="register-email" placeholder="Enter email">
+                        <small></small>
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="register-username">Username</label>-->
+                        <input
+                                name="username"
+                                type="text" class="form-control"
+                                id="register-username"
+                                placeholder="Enter username">
+                        <small></small>
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="register-password">Password</label>-->
+                        <input
+                                name="password"
+                                type="password" class="form-control"
+                                id="register-password" placeholder="Enter password">
+                        <small></small>
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="register-repeat-password">Repeat password</label>-->
+                        <input type="password" class="form-control"
+                               id="register-repeat-password" placeholder="Repeat password">
+                        <small></small>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button id="confirm-register" type="button" class="btn btn-success">Register</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="container mt-5 recipe-add-form">
     <main role="main">
         <section>
-            <h2><span class="recipe-title"></span> <span>ready for </span><span id="recipe-preptime"> </span></h2>
+            <h2><span class="recipe-title"></span> <span>ready for </span><span class="recipe-preptime"> </span> minutes</h2>
             <div class="recipeContainer">
                 <div>
                     <img class="cover recipe-cover">
@@ -107,18 +224,10 @@
                     <p class="title">Preparation</p>
                     <p class="recipe-preparation">Preparation</p>
                 </div>
-<!--                <div style="margin-top: 10px">-->
-<!--                    <button type="submit" class="btn btn-secondary modal-button float-left"-->
-<!--                            style="margin-left: 100px;">-->
-<!--                        Edit-->
-<!--                    </button>-->
-<!--                    <button type="submit"><a class="editPost" href="">Редактиране на рецепта</a></button>-->
-<!--                    <button type="submit"-->
-<!--                            class="btn btn-secondary red-modal-button float-right"-->
-<!--                            style="margin-right: 100px;">-->
-<!--                        Delete-->
-<!--                    </button>-->
-<!--                </div>-->
+                <div>
+                    <a class="edit-recipe-link" href="">Edit recipe</a>
+                    <a class="delete-recipe-link" href="">Delete recipe</a>
+                </div>
             </div>
         </section>
     </main>

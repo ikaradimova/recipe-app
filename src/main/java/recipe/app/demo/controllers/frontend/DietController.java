@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/diet")
 public class DietController {
-    @GetMapping()
-    public String index() {
+    @GetMapping("/add")
+    public String add() {
         return "diet/form";
     }
 }

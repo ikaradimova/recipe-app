@@ -188,16 +188,12 @@ $(document).ready(function () {
                             window.location = "/";
                             return;
                         }
-                        switch(data.status){
-                            case 200:
-                                alert('Recipe successfully added!');
-                                location.reload();
-                                break;
-                            case 401:
-                                alert('Something went wrong, please try again!');
-                                location.reload();
-                                break;
-
+                        if (data.status === 200) {
+                            alert('Recipe successfully added!');
+                            location.reload();
+                        } else {
+                            alert('Something went wrong, please try again!');
+                            location.reload();
                         }
                     },
                     fail: function (jqXHR, textStatus, errorThrown) {
@@ -205,6 +201,8 @@ $(document).ready(function () {
                         console.log(textStatus);
                         console.log(errorThrown);
                         console.log('error');
+                        alert('Something went wrong, please try again!');
+                        location.reload();
                         // window.location.href = "error.html";
                     }
                 });

@@ -147,7 +147,8 @@ $(function(){
     }
 
     $('#filter-add-button').click(function(){
-        // console.log($('.filter-diet').val());
+        console.log($('.filter-ingredient').val());
+        var ingredient = $('.filter-ingredient').val();
         console.log($('.filter-cuisine').val());
         console.log($('.filter-view').val());
         console.log(allCuisines);
@@ -157,13 +158,17 @@ $(function(){
                 cuisineId = cuisine.id;
             }
         });
+        if(cuisineId === undefined){
+            cuisineId = 0;
+        }
         console.log(cuisineId);
         console.log(allCuisines);
         $.ajax({
             method: "GET",
             url: "/api/recipe/filter",
             data: {
-                cuisineId: cuisineId
+                cuisineId: cuisineId,
+                ingredient: ingredient
             }
         })
             .done(function(response) {

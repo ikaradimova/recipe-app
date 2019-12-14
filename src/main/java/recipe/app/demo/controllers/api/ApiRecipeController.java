@@ -36,10 +36,10 @@ public class ApiRecipeController {
     private ServletContext servletContext;
 
     public ApiRecipeController(UserRepository userRepository,
-                            RecipeRepository recipeRepository,
-                            DietRepository dietRepository,
-                            CuisineRepository cuisineRepository,
-                            ServletContext servletContext) {
+                               RecipeRepository recipeRepository,
+                               DietRepository dietRepository,
+                               CuisineRepository cuisineRepository,
+                               ServletContext servletContext) {
         this.userRepository = userRepository;
         this.recipeRepository = recipeRepository;
         this.dietRepository = dietRepository;
@@ -64,17 +64,17 @@ public class ApiRecipeController {
 //        int numOfErrors = 0;
 //        Date now = new Date();
         User user = (User) session.getAttribute("user");
-        if(user == null){
+        if (user == null) {
             return new ResponseEntity<>("No user", HttpStatus.UNAUTHORIZED);
         }
         Set<Diet> diets = new HashSet<Diet>();
         Diet diet = dietRepository.findByType(dietType);
         diets.add(diet);
         Cuisine cuisine = cuisineRepository.findByType(cuisineType);
-        if(cuisine == null){
+        if (cuisine == null) {
             return new ResponseEntity<>("No cuisine", HttpStatus.BAD_GATEWAY);
         }
-        if(diets == null){
+        if (diets == null) {
             return new ResponseEntity<>("No diet", HttpStatus.BAD_GATEWAY);
         }
         Path path;
@@ -97,8 +97,7 @@ public class ApiRecipeController {
             // save the file to `UPLOAD_DIR`
             // make sure you have permission to write
             Files.write(path, file.getBytes());
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_GATEWAY);
         }
 
@@ -124,16 +123,14 @@ public class ApiRecipeController {
     }
 
     @GetMapping("/getRecipes")
-    public List<Recipe> getRecipes()
-    {
+    public List<Recipe> getRecipes() {
         return recipeRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Optional<Recipe> getRecipe(
             @RequestParam(value = "id") int id
-    )
-    {
+    ) {
         return recipeRepository.findById(id);
     }
 
@@ -155,21 +152,21 @@ public class ApiRecipeController {
 //        int numOfErrors = 0;
 //        Date now = new Date();
         User user = (User) session.getAttribute("user");
-        if(user == null){
+        if (user == null) {
             return new ResponseEntity<>("No user", HttpStatus.UNAUTHORIZED);
         }
         Optional<Recipe> recipe = recipeRepository.findById(id);
-        if(recipe == null){
+        if (recipe == null) {
             return new ResponseEntity<>("No recipe", HttpStatus.BAD_GATEWAY);
         }
         Set<Diet> diets = new HashSet<Diet>();
         Diet diet = dietRepository.findByType(dietType);
         diets.add(diet);
         Cuisine cuisine = cuisineRepository.findByType(cuisineType);
-        if(cuisine == null){
+        if (cuisine == null) {
             return new ResponseEntity<>("No cuisine", HttpStatus.BAD_GATEWAY);
         }
-        if(diets == null){
+        if (diets == null) {
             return new ResponseEntity<>("No diet", HttpStatus.BAD_GATEWAY);
         }
 //        Path path;
@@ -235,27 +232,54 @@ public class ApiRecipeController {
 
     @GetMapping("/filter")
     public List<Recipe> filter(
-//            @RequestParam(value = "dietId") int dietId,
-            @RequestParam(value = "cuisineId") int cuisineId
-    ){
-//        if(dietId == 0){
-//            if(cuisineId == 0){
-//                return recipeRepository.findAll();
-//            } else {
-//                return recipeRepository.findByCuisineId(cuisineId);
-//            }
-//        } else {
-//            if(cuisineId == 0){
-//                return recipeRepository.findByDietId(dietId);
-//            } else {
-//                return recipeRepository.findByDietIdAndCuisineId(dietId, cuisineId);
-//            }
-//        }
+            @RequestParam(value = "cuisineId") int cuisineId,
+            @RequestParam(value = "ingredient") String ingredient
+    ) {
 
-        if(cuisineId != 0){
+        if (cuisineId == 0) {
+            if(ingredient.equals("")){
+                return recipeRepository.findAll();
+            } else {
+                return recipeRepository.findByIngredientsContaining(ingredient);
+            }
+        } else {
+            if(ingredient.equals("")){
                 return recipeRepository.findByCuisineId(cuisineId);
             } else {
-                return recipeRepository.findAll();
+                return recipeRepository.findByIngredientsContainingAndCuisineId(ingredient, cuisineId);
             }
+
+        }
+    }
+
+    @DeleteMapping(path = "/delete")
+    public ResponseEntity<Boolean> deleteRecipe(
+            @RequestParam(value = "id") int id,
+            HttpSession session
+    ){
+
+        User user = (User)session.getAttribute("user");
+
+        if(user == null) {
+            return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+        }
+
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+
+        if(optionalRecipe.isPresent()) {
+
+            Recipe recipe = optionalRecipe.get();
+
+            if(user.getRole().getName().equals("admin")) {
+                recipeRepository.delete(recipe);
+
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(false, HttpStatus.I_AM_A_TEAPOT);
+            }
+
+        }else {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 }

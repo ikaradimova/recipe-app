@@ -113,8 +113,10 @@
                         console.log(data);
                         /** if success redirect to login page */
                         if(data === 'success'){
-                            console.log('successful registration');
-                            window.location.href = "/profile";
+                            alert('Registration successful. Please log in.');
+                            $('#registerModal').modal('hide');
+                            $('#loginModal').modal('show');
+                            // window.location.href = "/profile";
                         } else if(data === 'error') { /** on error show alert and clear all fields */
                             alert('Something messed up, please try again.');
                             cleanAllFields();

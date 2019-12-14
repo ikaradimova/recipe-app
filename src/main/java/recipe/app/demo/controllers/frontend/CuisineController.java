@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/cuisine")
 public class CuisineController {
-    @GetMapping()
-    public String index() {
+    @GetMapping("/add")
+    public String add() {
         return "cuisine/form";
     }
 }

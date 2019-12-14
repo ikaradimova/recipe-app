@@ -11,6 +11,8 @@ $(function(){
     } else {
         var id = pathParts[2];
         console.log(pathParts);
+        var recipe;
+        var recipeUserId;
 
         // function getRecipe(){
             $.ajax({
@@ -22,6 +24,12 @@ $(function(){
             })
                 .done(function(response) {
                     console.log(response);
+                    if(response === null){
+                        window.location = '/';
+                    }
+                    recipe = response;
+                    console.log(recipe);
+                    recipeUserId = recipe.user.id;
 
                     $(".recipe-title").html(response.title);
                     $(".recipe-preptime").html(response.preptime);
@@ -62,6 +70,56 @@ $(function(){
 
         // getRecipe();
     }
+
+    $.ajax({
+        method: "GET",
+        url: "/api/profile/getUserProfile"
+    })
+        .done(function(response) {
+            console.log(response);
+            if(!response){
+                $('.edit-recipe-link').hide();
+                $('.delete-recipe-link').hide();
+                // return;
+            } else {
+                if(response.role.name === 'user'){
+                    $('.delete-recipe-link').hide();
+                    console.log(response.id);
+                    console.log(recipe);
+                    console.log(recipeUserId);
+                    if(response.id !== recipeUserId){
+                        $('.edit-recipe-link').hide();
+                    } else {
+                        $('.edit-recipe-link').attr('href', '/recipe/edit/' + id);
+                    }
+                    // $('.add-cuisine-link').hide();
+                    // $('.add-diet-link').hide();
+                } else {
+                    $('.edit-recipe-link').attr('href', '/recipe/edit/' + id);
+                }
+            }
+        });
+
+        $('.delete-recipe-link').click(function () {
+            $.ajax(
+                {
+                    method : "DELETE",
+                    url : "/api/recipe/delete",
+                    data: {
+                        id: id
+                    },
+                    complete : function(response) {
+                        console.log(response);
+                        if (response.status === 200) {
+                            alert("Deletion successful!")
+                            window.location.href = "/";
+
+                        } else {
+                            alert("Some error occurred!");
+                        }
+                    }
+                })
+        })
 
 
     // });

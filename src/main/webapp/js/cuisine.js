@@ -12,7 +12,7 @@ $(document).ready(function () {
         })
             .done(function(response) {
                 console.log(response);
-                if(!response){
+                if(!response || response.role.name === 'user'){
                     window.location = "/";
                     return;
                 }
