@@ -86,12 +86,7 @@
             cleanPasswordFields();
         }
 
-        registerFormValidation(false);
-
-        /** submitting register form */
-        $('#confirm-register').click(function (e) {
-            console.log('test');
-            e.preventDefault();
+        function submitRegisterForm(){
             registerFormValidation(true);
 
             /** send request only if all fields are not empty */
@@ -118,7 +113,7 @@
                             $('#loginModal').modal('show');
                             // window.location.href = "/profile";
                         } else if(data === 'error') { /** on error show alert and clear all fields */
-                            alert('Something messed up, please try again.');
+                        alert('Something messed up, please try again.');
                             cleanAllFields();
                         } else {
                             /** stupid temporary solution for field validation */
@@ -148,28 +143,60 @@
                     }
                 });
             }
+        }
+
+        registerFormValidation(false);
+
+        /** submitting register form when submit button is clicked */
+        $('#confirm-register').click(function (e) {
+            console.log('test');
+            e.preventDefault();
+            submitRegisterForm();
+        });
+
+        /** form submit when enter button is pressed inside repeat password input */
+        repeatPasswordField.on('keypress',function(e) {
+            if(e.which === 13) {
+                submitRegisterForm();
+            }
         });
     }
 
-    if($('#login-form').length > 0){
-        console.log('form exists');
-        let usernameField = $('#login-username');
-        let passwordField = $('#login-password');
+    /** ---------------- LOGIN -------------------------*/
 
-        $('#confirm-login').click(function (e) {
-            console.log('submit');
-            e.preventDefault();
+    /** login section because for some reason login.js is not working */
+    if($('#login-form').length > 0){
+        var loginUsernameField = $('#login-username');
+        var loginPasswordField = $('#login-password');
+
+        /** Validation on empty fields */
+        function loginFormValidation(formSubmitted){
+            emptyFieldValidation(loginUsernameField, formSubmitted);
+            emptyFieldValidation(loginPasswordField, formSubmitted);
+
+            // frontend check if passwords match - to be added
+        }
+
+        function actOnError(){
+            alert("Login unsuccessful. Please try again.");
+            loginUsernameField.val('');
+            loginPasswordField.val('');
+        }
+
+        /** Login submit function */
+        function submitLoginForm(){
+            loginFormValidation(true);
 
             /** send request only if all fields are not empty */
-            if(usernameField.val() !== '' &&
-                passwordField.val() !== ''
+            if(loginUsernameField.val() !== '' &&
+                loginPasswordField.val() !== ''
             ){
                 $.ajax({
                     url: "/login",
                     method: "POST",
                     data: {
-                        username: usernameField.val(),
-                        password: passwordField.val(),
+                        username: loginUsernameField.val(),
+                        password: loginPasswordField.val(),
                     },
                     success: function (data) {
                         console.log(data);
@@ -177,16 +204,33 @@
                         if(data === 'success'){
                             console.log('successful registration');
                             window.location.href = "/profile";
-                        } else if(data === 'error') {
-                            console.log('error')
+                        } else {
+                            actOnError();
                         }
                         // window.location.replace(data);
                     },
                     fail: function () {
-                        console.log('error')
+                        actOnError();
                         // window.location.href = "error.html";
                     }
                 });
+            }
+        }
+
+        /** form validation before form submit */
+        loginFormValidation(false);
+
+        /** form submit when button submit is being clicked */
+        $('#confirm-login').click(function (e) {
+            console.log('submit');
+            e.preventDefault();
+            submitLoginForm();
+        });
+
+        /** form submit when enter button is pressed inside password input */
+        loginPasswordField.on('keypress',function(e) {
+            if(e.which === 13) {
+                submitLoginForm();
             }
         });
 

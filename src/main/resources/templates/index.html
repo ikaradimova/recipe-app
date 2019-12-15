@@ -93,6 +93,7 @@
                                     id="login-username"
                                     placeholder="Enter username"
                             >
+                            <small></small>
                         </div>
                     </div>
                     <div class="form-group">
@@ -108,6 +109,7 @@
                                     id="login-password"
                                     placeholder="Enter password"
                             >
+                            <small></small>
                         </div>
                     </div>
                     <!--
@@ -128,91 +130,6 @@
         </div>
     </div>
 </div>
-
-<!--
-<div class="container">
-    <div class="row">
-
-        <div class="col-md-7 mt-3 mt-md-5">
-            <div class="card">
-                <div class="card-body">
-                   <img class="img-fluid" src="images/image.jpg">
-                </div>
-            </div>
-        </div>
-        <div class="col mt-3 mt-md-5">
-            <div class="card">
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-envelope"></i>
-                                        </span>
-                                </div>
-                                <input
-                                        type="email" class="form-control"
-                                        id="email"
-                                        placeholder="Въведи email"
-                                >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Парола</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-key"></i>
-                                        </span>
-                                </div>
-                                <input
-                                        type="password" class="form-control"
-                                        id="password"
-                                        placeholder="Въведи парола"
-                                >
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <button id="login-button" type="button" class="btn btn-success">Влез</button>
-                            <button type="button" class="btn btn-outline-success"
-                                    data-toggle="modal"
-                                    data-target="#registerModal">Регистрация
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-4 mt-3 mt-md-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Снимка</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mt-3 mt-md-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Логин форма</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mt-3 mt-md-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Логин форма</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
-
 
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -298,18 +215,18 @@
                         <div class="form-group col-4">
                             <label>Ingredients</label>
                             <input type="text"
-                                   class="form-control filter-ingredient"
+                                   class="form-control filter filter-ingredient"
                                    placeholder="Insert ingredient">
                         </div>
                         <div class="form-group col-4">
                             <label>Cuisines</label>
-                            <select class="form-control filter-cuisine">
+                            <select class="form-control filter filter-cuisine">
                                 <option>All</option>
                             </select>
                         </div>
                         <div class="form-group col-4">
                             <label>Views</label>
-                            <select class="form-control filter-view">
+                            <select class="form-control filter filter-view">
                                 <option>Grid</option>
                                 <option>List</option>
                             </select>
@@ -317,9 +234,9 @@
 <!--                        </div>-->
                     </div>
                 </div>
-                <div class="card-footer d-flex justify-content-end">
-                    <button id="filter-add-button" type="button" class="btn btn-primary">Apply</button>
-                </div>
+<!--                <div class="card-footer d-flex justify-content-end">-->
+<!--                    <button id="filter-add-button" type="button" class="btn btn-primary">Apply</button>-->
+<!--                </div>-->
             </div>
         </div>
 
