@@ -180,26 +180,22 @@ $(function(){
             //     // window.location.replace(data);
             // },
             complete: function(data){
+                console.log(data);
                 if(!data){
                     window.location = "/";
                     return;
                 }
-                switch(data.status){
-                    case 200:
-
-
-                        break;
-                    case 401:
-                        window.location.href = "/";
-                        break;
-
+                if (data.status === 200) {
+                    alert('Recipe was successfully updated.');
+                    window.location.href = '/';
+                } else {
+                    alert('Something went wrong.');
+                    window.location.href = '/';
                 }
             },
             fail: function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
-                console.log('error');
+                alert('Something went wrong.');
+                window.location.href = '/';
                 // window.location.href = "error.html";
             }
         });

@@ -22,13 +22,13 @@ $(document).ready(function () {
             method: "GET",
             url: "/api/profile/getUserProfile"
         })
-            .done(function(response) {
+            .done(function (response) {
                 console.log(response);
-                if(!response){
+                if (!response) {
                     window.location = "/";
                     // return;
                 } else {
-                    if(response.role.name === 'user'){
+                    if (response.role.name === 'user') {
                         $('.add-cuisine-link').hide();
                         $('.add-diet-link').hide();
                     }
@@ -44,7 +44,7 @@ $(document).ready(function () {
                 $.each(response, function (i, diet) {
                     recipeAddDietField.append($('<option>', {
                         value: diet.type,
-                        text : diet.type
+                        text: diet.type
                     }));
                 });
                 // if(!response){
@@ -61,7 +61,7 @@ $(document).ready(function () {
                 $.each(response, function (i, cuisine) {
                     recipeAddCuisineField.append($('<option>', {
                         value: cuisine.type,
-                        text : cuisine.type
+                        text: cuisine.type
                     }));
                 });
                 // if(!response){
@@ -70,11 +70,11 @@ $(document).ready(function () {
                 // }
             });
 
-        function emptyFieldValidation(field, formSubmitted){
+        function emptyFieldValidation(field, formSubmitted) {
             var helpField = field.next();
 
             /** check if form is submitted, if it is not adds additional check if all fields are filled */
-            if(formSubmitted === true) {
+            if (formSubmitted === true) {
                 if (field.val() === '') {
                     field.addClass('border border-danger');
                     helpField.text('This field is required.').addClass('text-danger');
@@ -89,8 +89,8 @@ $(document).ready(function () {
             }
 
             /** checks if field is empty when it gets out of focus and adds danger classes if not filled */
-            field.focusout(function(){
-                if(!field.val()) {
+            field.focusout(function () {
+                if (!field.val()) {
                     $(this).addClass('border border-danger');
                     helpField.text('This field is required.').addClass('text-danger');
                 }
@@ -107,7 +107,7 @@ $(document).ready(function () {
          * Input validations
          * @param formSubmitted - checks if form is submitted
          */
-        function recipeFormValidation(formSubmitted){
+        function recipeFormValidation(formSubmitted) {
             emptyFieldValidation(recipeAddTitleField, formSubmitted);
             emptyFieldValidation(recipeAddPreptimeField, formSubmitted);
             emptyFieldValidation(recipeAddDescriptionField, formSubmitted);
@@ -127,42 +127,38 @@ $(document).ready(function () {
             console.log('submit');
             e.preventDefault();
             recipeFormValidation(true);
+            if (recipeAddTitleField.val() !== '' &&
+                recipeAddPreptimeField.val() !== '' &&
+                recipeAddDescriptionField.val() !== '' &&
+                recipeAddIngredientsField.val() !== '' &&
+                recipeAddPreparationField.val() !== '' &&
+                recipeAddCoverField.val() !== '' &&
+                recipeAddDietField.val() !== '' &&
+                recipeAddCuisineField.val() !== '') {
 
-            // var data = {
-            //     title: recipeAddTitleField.val(),
-            //     preptime: recipeAddPreptimeField.val(),
-            //     description: recipeAddDescriptionField.val(),
-            //     ingredients: recipeAddIngredientsField.val(),
-            //     preparation: recipeAddPreparationField.val(),
-            //     cover: recipeAddCoverField.files[0],//new FormData(this),
-            //     // createdAt: Date.now(),
-            //     dietType: recipeAddDietField.val(),
-            //     cuisineType: recipeAddCuisineField.val()
-            // };
+                console.log(recipeAddCoverField[0].files);
 
-            console.log(recipeAddCoverField[0].files);
+                var formData = new FormData();
+                formData.append('title', recipeAddTitleField.val());
+                formData.append('preptime', recipeAddPreptimeField.val());
+                formData.append('description', recipeAddDescriptionField.val());
+                formData.append('ingredients', recipeAddIngredientsField.val());
+                formData.append('preparation', recipeAddPreparationField.val());
+                formData.append('cover', recipeAddCoverField[0].files[0]);
+                formData.append('dietType', recipeAddDietField.val());
+                formData.append('cuisineType', recipeAddCuisineField.val());
 
-            var formData = new FormData();
-            formData.append('title', recipeAddTitleField.val());
-            formData.append('preptime', recipeAddPreptimeField.val());
-            formData.append('description', recipeAddDescriptionField.val());
-            formData.append('ingredients', recipeAddIngredientsField.val());
-            formData.append('preparation', recipeAddPreparationField.val());
-            formData.append('cover', recipeAddCoverField[0].files[0]);
-            formData.append('dietType', recipeAddDietField.val());
-            formData.append('cuisineType', recipeAddCuisineField.val());
+                // console.log(data);
+                // console.log(new FormData(this));
 
-            // console.log(data);
-            // console.log(new FormData(this));
-
-            /** send request only if all fields are not empty */
-            // if(
-            //     recipeAddTitleField.val() !== '' &&
-            //     recipeAddPreptimeField.val() !== '' &&
-            //     recipeAddDescriptionField.val() !== '' &&
-            //     recipeAddIngredientsField.val() !== '' &&
-            //     recipeAddPreparationField.val() !== ''
-            // ){
+                /** send request only if all fields are not empty */
+                // if(
+                //     recipeAddTitleField.val() !== '' &&
+                //     recipeAddPreptimeField.val() !== '' &&
+                //     recipeAddDescriptionField.val() !== '' &&
+                //     recipeAddIngredientsField.val() !== '' &&
+                //     recipeAddPreparationField.val() !== ''
+                // ){
                 $.ajax({
                     url: "/api/recipe/add",
                     method: "POST",
@@ -182,9 +178,9 @@ $(document).ready(function () {
                     //     // }
                     //     // window.location.replace(data);
                     // },
-                    complete: function(data){
+                    complete: function (data) {
                         console.log(data);
-                        if(!data){
+                        if (!data) {
                             window.location = "/";
                             return;
                         }
@@ -206,7 +202,7 @@ $(document).ready(function () {
                         // window.location.href = "error.html";
                     }
                 });
-            // }
+            }
         });
 
     }
