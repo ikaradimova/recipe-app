@@ -96,7 +96,7 @@
                 repeatPasswordField.val() !== ''
             ){
                 $.ajax({
-                    url: "/register",
+                    url: "/api/register",
                     method: "POST",
                     data: {
                         email: emailField.val(),
@@ -192,7 +192,7 @@
                 loginPasswordField.val() !== ''
             ){
                 $.ajax({
-                    url: "/login",
+                    url: "/api/login",
                     method: "POST",
                     data: {
                         username: loginUsernameField.val(),
@@ -205,7 +205,9 @@
                             console.log('successful registration');
                             window.location.href = "/profile";
                         } else {
-                            actOnError();
+                            alert(data);
+                            loginUsernameField.val('');
+                            loginPasswordField.val('');
                         }
                         // window.location.replace(data);
                     },

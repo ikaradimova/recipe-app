@@ -32,7 +32,6 @@ public class ApiRecipeController {
     private RecipeRepository recipeRepository;
     private DietRepository dietRepository;
     private CuisineRepository cuisineRepository;
-    //    private Set<Diet> diets;
     private ServletContext servletContext;
 
     public ApiRecipeController(UserRepository userRepository,
@@ -47,7 +46,6 @@ public class ApiRecipeController {
         this.servletContext = servletContext;
     }
 
-
     @PostMapping(path = "/add")
     public ResponseEntity add(
             @RequestParam(value = "title") String title,
@@ -56,13 +54,10 @@ public class ApiRecipeController {
             @RequestParam(value = "ingredients") String ingredients,
             @RequestParam(value = "preparation") String preparation,
             @RequestParam(value = "cover") MultipartFile file,
-//            @RequestParam(value = "createdAt") Date createdAt,
             @RequestParam(value = "dietType") String dietType,
             @RequestParam(value = "cuisineType") String cuisineType,
             HttpSession session
     ) {
-//        int numOfErrors = 0;
-//        Date now = new Date();
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return new ResponseEntity<>("No user", HttpStatus.UNAUTHORIZED);
@@ -84,18 +79,12 @@ public class ApiRecipeController {
 
             webappRoot = servletContext.getRealPath("/");
 
-//            String relativeFolder = File.separator + "resources" + File.separator + "images" + File.separator;
             String relativeFolder = webappRoot + "image-upload";
             filename = relativeFolder + File.separator + file.getOriginalFilename();
-
-            // upload directory - change it to your own
-//            String UPLOAD_DIR = "/opt/uploads";
 
             // create a path from file name
             path = Paths.get(relativeFolder, file.getOriginalFilename());
 
-            // save the file to `UPLOAD_DIR`
-            // make sure you have permission to write
             Files.write(path, file.getBytes());
         } catch (Exception ex) {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_GATEWAY);
@@ -118,8 +107,6 @@ public class ApiRecipeController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.I_AM_A_TEAPOT);
         }
-
-//        }
     }
 
     @GetMapping("/getRecipes")
@@ -143,14 +130,10 @@ public class ApiRecipeController {
             @RequestParam(value = "description") String description,
             @RequestParam(value = "ingredients") String ingredients,
             @RequestParam(value = "preparation") String preparation,
-//            @RequestParam(value = "cover") MultipartFile file,
-//            @RequestParam(value = "createdAt") Date createdAt,
             @RequestParam(value = "dietType") String dietType,
             @RequestParam(value = "cuisineType") String cuisineType,
             HttpSession session
     ) {
-//        int numOfErrors = 0;
-//        Date now = new Date();
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return new ResponseEntity<>("No user", HttpStatus.UNAUTHORIZED);
@@ -169,34 +152,10 @@ public class ApiRecipeController {
         if (diets == null) {
             return new ResponseEntity<>("No diet", HttpStatus.BAD_GATEWAY);
         }
-//        Path path;
-//        String webappRoot;
-//        String filename;
-//        String pathToSave;
-//        if(file != null) {
-//            try {
-//
-//                webappRoot = servletContext.getRealPath("/");
-//
-////            String relativeFolder = File.separator + "resources" + File.separator + "images" + File.separator;
-//                String relativeFolder = webappRoot + "image-upload";
-//                filename = relativeFolder + File.separator + file.getOriginalFilename();
-//
-//                // upload directory - change it to your own
-////            String UPLOAD_DIR = "/opt/uploads";
-//
-//                // create a path from file name
-//                path = Paths.get(relativeFolder, file.getOriginalFilename());
-//
-//                // save the file to `UPLOAD_DIR`
-//                // make sure you have permission to write
-//                Files.write(path, file.getBytes());
-//            } catch (Exception ex) {
-//                return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_GATEWAY);
-//            }
-//            recipe.setCover(File.separator + "image-upload" + File.separator + file.getOriginalFilename());
-//        }
 
+        if (!recipe.isPresent()) {
+            return new ResponseEntity<>("No recipe found", HttpStatus.BAD_GATEWAY);
+        }
         recipe.get().setTitle(title);
         recipe.get().setPreptime(preptime);
         recipe.get().setDescription(description);
@@ -207,27 +166,12 @@ public class ApiRecipeController {
         recipe.get().setDiets(diets);
         recipe.get().setCuisine(cuisine);
 
-
-//        Recipe recipe = new Recipe(
-//                title,
-//                preptime,
-//                description,
-//                ingredients,
-//                preparation,
-//                File.separator + "image-upload" + File.separator + file.getOriginalFilename(),
-//                user,
-//                diets,
-//                cuisine
-//        );
-//        return new ResponseEntity<>(recipe, HttpStatus.OK);
         try {
             recipeRepository.saveAndFlush(recipe.get());
             return new ResponseEntity<>(recipe, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.I_AM_A_TEAPOT);
         }
-
-//        }
     }
 
     @GetMapping("/filter")
@@ -235,15 +179,14 @@ public class ApiRecipeController {
             @RequestParam(value = "cuisineId") int cuisineId,
             @RequestParam(value = "ingredient") String ingredient
     ) {
-
         if (cuisineId == 0) {
-            if(ingredient.equals("")){
+            if (ingredient.equals("")) {
                 return recipeRepository.findAll();
             } else {
                 return recipeRepository.findByIngredientsContaining(ingredient);
             }
         } else {
-            if(ingredient.equals("")){
+            if (ingredient.equals("")) {
                 return recipeRepository.findByCuisineId(cuisineId);
             } else {
                 return recipeRepository.findByIngredientsContainingAndCuisineId(ingredient, cuisineId);
@@ -256,29 +199,26 @@ public class ApiRecipeController {
     public ResponseEntity<Boolean> deleteRecipe(
             @RequestParam(value = "id") int id,
             HttpSession session
-    ){
+    ) {
+        User user = (User) session.getAttribute("user");
 
-        User user = (User)session.getAttribute("user");
-
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
         }
 
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
 
-        if(optionalRecipe.isPresent()) {
+        if (optionalRecipe.isPresent()) {
 
             Recipe recipe = optionalRecipe.get();
 
-            if(user.getRole().getName().equals("admin")) {
+            if (user.getRole().getName().equals("admin")) {
                 recipeRepository.delete(recipe);
-
                 return new ResponseEntity<>(true, HttpStatus.OK);
-            }else {
+            } else {
                 return new ResponseEntity<>(false, HttpStatus.I_AM_A_TEAPOT);
             }
-
-        }else {
+        } else {
             return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
         }
     }

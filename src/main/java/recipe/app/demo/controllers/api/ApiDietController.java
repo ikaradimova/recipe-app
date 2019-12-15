@@ -28,7 +28,7 @@ public class ApiDietController {
             HttpSession session
     ) {
         User user = (User) session.getAttribute("user");
-        if(user == null){
+        if (user == null) {
             return new ResponseEntity<>("No user", HttpStatus.UNAUTHORIZED);
         }
         Diet diet = new Diet(type);
@@ -41,13 +41,10 @@ public class ApiDietController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-
-//        }
     }
 
     @GetMapping("/getDiets")
-    public List<Diet> getDiets()
-    {
+    public List<Diet> getDiets() {
         return dietRepository.findAll();
     }
 }

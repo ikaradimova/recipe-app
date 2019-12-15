@@ -26,7 +26,7 @@ public class ApiCuisineController {
             HttpSession session
     ) {
         User user = (User) session.getAttribute("user");
-        if(user == null){
+        if (user == null) {
             return new ResponseEntity<>("No user", HttpStatus.UNAUTHORIZED);
         }
         Cuisine cuisine = new Cuisine(type);
@@ -39,13 +39,10 @@ public class ApiCuisineController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-
-//        }
     }
 
     @GetMapping("/getCuisines")
-    public List<Cuisine> getCuisines()
-    {
+    public List<Cuisine> getCuisines() {
         return cuisineRepository.findAll();
     }
 }

@@ -100,15 +100,22 @@ $(function () {
                     },
                 complete: function (response) {
                     console.log(response);
-                    if (response.status === 200) {
-                        alert('Profile has been successfully updated');
-                        passwordField.val('');
-                        repeatPasswordField.val('');
-
-                    } else {
-                        alert("Some error occurred while uploading your profile. Please try again");
-                        passwordField.val('');
-                        repeatPasswordField.val('');
+                    switch(response.status){
+                        case 200:
+                            alert('Profile has been successfully updated');
+                            passwordField.val('');
+                            repeatPasswordField.val('');
+                            break;
+                        case 400:
+                            alert('Username or email is used by another user. Please try again with something different.');
+                            passwordField.val('');
+                            repeatPasswordField.val('');
+                            break;
+                        default:
+                            alert("Some error occurred while uploading your profile. Please try again");
+                            passwordField.val('');
+                            repeatPasswordField.val('');
+                            break;
                     }
                 }
             })

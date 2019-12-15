@@ -22,57 +22,49 @@ public class ApiProfileController {
     }
 
     @GetMapping("/getUserProfile")
-    public User getUserProfile(HttpSession session)
-    {
+    public User getUserProfile(HttpSession session) {
         return (User) session.getAttribute("user");
     }
 
-//    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-//    public String index(){
-//        return "profile/index";
-//    }
+    @PostMapping(path = "/logout")
+    public ResponseEntity<Boolean> logout(HttpSession session) {
 
-    @PostMapping(path="/logout")
-    public ResponseEntity<Boolean> logout(HttpSession session){
-
-        User user = (User)session.getAttribute("user");
-        if(user!= null) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
 
             session.invalidate();
-            return  new ResponseEntity<>(true, HttpStatus.OK);
+            return new ResponseEntity<>(true, HttpStatus.OK);
 
         }
-        return  new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
-    @PostMapping(path="/update")
+    @PostMapping(path = "/update")
     public ResponseEntity<Boolean> update(
             @RequestParam(value = "username") String username,
             @RequestParam(value = "email") String email,
             @RequestParam(value = "password") String password,
             @RequestParam(value = "rePassword") String rePassword,
-            HttpSession session){
+            HttpSession session) {
 
         User user = (User) session.getAttribute("user");
 
-        if(user!=null) {
+        if (user != null) {
             Optional<User> findUser = userRepository.findById(user.getId());
-            if(findUser.isPresent())
-            {
-                boolean checkUser = checkUserName(username,findUser.get());
-                if(!checkUser)
+            if (findUser.isPresent()) {
+                boolean checkUser = checkUserName(username, findUser.get());
+                if (!checkUser) {
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                }
                 boolean checkEmail = checkEmail(email, findUser.get());
-                if(!checkEmail)
+                if (!checkEmail) {
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                }
 
                 findUser.get().setEmail(email);
                 findUser.get().setUsername(username);
                 //Check password and replace it if have
-                if(password != null
-                        && password == " "
-                        && password.equals(rePassword))
-                {
+                if (password != null && password.equals(rePassword)) {
                     findUser.get().setPassword(hashGenerator.hash(password));
                 }
                 userRepository.saveAndFlush(findUser.get());
@@ -87,25 +79,21 @@ public class ApiProfileController {
     private boolean checkUserName(String username, User findUser) {
 
         User findUserBy = userRepository.findByUsername(username);
-        if(findUserBy != null)
-        {
+        if (findUserBy != null) {
 
-            if(findUserBy.getId() != findUser.getId())
-            {
+            if (findUserBy.getId() != findUser.getId()) {
                 return false;
             }
         }
         return true;
     }
-    private boolean checkEmail(String email, User findUser)
-    {
+
+    private boolean checkEmail(String email, User findUser) {
 
         User findUserBy = userRepository.findByEmail(email);
-        if(findUserBy != null)
-        {
+        if (findUserBy != null) {
 
-            if(findUserBy.getId() != findUser.getId())
-            {
+            if (findUserBy.getId() != findUser.getId()) {
                 return false;
             }
         }

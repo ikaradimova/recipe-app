@@ -77,7 +77,7 @@ $(document).ready(function () {
                             alert('Cuisine successfully added!');
                             location.reload();
                         } else {
-                            alert(data);
+                            alert(data);r
                             location.reload();
                         }
                         // window.location.replace(data);
