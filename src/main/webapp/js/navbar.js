@@ -8,6 +8,9 @@ $(function () {
             console.log(response);
             /** if noone is logged show login and register */
             if (!response) {
+                $('.add-recipe-link').hide();
+                $('.profile-link').hide();
+                $('.logout-link').hide();
                 $('.login-link').show();
                 $('.register-link').show();
             } else {
@@ -15,6 +18,9 @@ $(function () {
                 $('.add-recipe-link').show();
                 $('.profile-link').show();
                 $('.logout-link').show();
+                $('.login-link').hide();
+                $('.register-link').hide();
+
             }
 
         });
